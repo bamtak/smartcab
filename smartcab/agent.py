@@ -73,25 +73,19 @@ class LearningAgent(Agent):
 
 
     def get_maxQ_action(self, state):
-        """ The get_max_Q function is called when the agent is asked to find the action with
+        """ The get_maxQ_action function is called when the agent is asked to find the action with
             maximum Q-value of all actions based on the 'state' the smartcab is in. """
 
         ########### 
         ## TO DO ##
         ###########
         # Calculate the maximum Q-value of all actions for a given state
-
-        k = random.choice(self.Q[state].keys())
-        actions = [k]
-        q_val = self.Q[state][k]
-        for a,v in self.Q[state].items():
-            if v > q_val:
-                q_val = v
-                actions = [a]
-            else:
-                if v == q_val :
-                    actions.append(a)
-        return random.choice(actions)
+        maxQ = max(self.Q[state].values())
+        maxQ_actions = []
+        for action,q_val in self.Q[state].items() :
+            if q_val == maxQ:
+                maxQ_actions.append(action)			
+        return random.choice(maxQ_actions)
 
     def choose_random_action(self, state):
         action = []
